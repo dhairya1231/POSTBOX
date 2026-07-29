@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Postbox — AI Mail Composer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;1,500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+  <div id="login-screen" class="login-screen">
+    <div class="seal">✉</div>
+    <h1>Postbox</h1>
+    <p class="tagline">Your inbox, with an AI hand for the drafting.</p>
+    <button id="login-btn" class="btn-primary">Connect Gmail</button>
+  </div>
+
+  <div id="app" class="app hidden">
+    <header class="topbar">
+      <div class="brand"><span class="seal small">✉</span> Postbox</div>
+      <nav class="tabs">
+        <button class="tab-btn active" data-tab="inbox">Inbox</button>
+        <button class="tab-btn" data-tab="compose">Compose</button>
+      </nav>
+      <button id="logout-btn" class="btn-ghost">Disconnect</button>
+    </header>
+
+    <main class="content">
+
+      <!-- INBOX VIEW -->
+      <section id="inbox-view" class="view active">
+        <div class="mail-list-pane">
+          <div class="pane-header">
+            <input id="search-input" type="text" placeholder="Search mail…" />
+            <button id="refresh-btn" class="btn-ghost small">Refresh</button>
+          </div>
+          <div id="mail-list" class="mail-list">
+            <div class="empty-state">Loading your inbox…</div>
+          </div>
+        </div>
+        <div class="mail-reading-pane">
+          <div id="reading-empty" class="empty-state centered">Select an email to read it here.</div>
+          <div id="reading-content" class="reading-content hidden">
+            <div class="reading-meta">
+              <h2 id="reading-subject"></h2>
+              <div class="meta-row"><span class="meta-label">From</span><span id="reading-from" class="mono"></span></div>
+              <div class="meta-row"><span class="meta-label">Date</span><span id="reading-date" class="mono"></span></div>
+            </div>
+            <div id="reading-body" class="reading-body"></div>
+            <button id="reply-btn" class="btn-secondary">Reply with AI draft</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- COMPOSE VIEW -->
+      <section id="compose-view" class="view">
+        <div class="compose-pane">
+          <h2 class="section-title">1. Tell the AI what to say</h2>
+          <label class="field-label">To</label>
+          <input id="compose-to" type="text" placeholder="recipient@example.com" />
+
+          <label class="field-label">Context / rough notes</label>
+          <textarea id="compose-context" rows="6" placeholder="e.g. Tell my professor I'll miss Friday's lab because of a placement interview, ask if I can submit the report by Monday instead"></textarea>
+
+          <div class="row">
+            <div class="col">
+              <label class="field-label">Tone (optional)</label>
+              <input id="compose-tone" type="text" placeholder="e.g. formal, casual, apologetic" />
+            </div>
+          </div>
+
+          <button id="draft-btn" class="btn-primary">
+            <span class="btn-text">Draft with AI</span>
+          </button>
+          <p id="draft-status" class="status-line"></p>
+        </div>
+
+        <div class="compose-pane">
+          <h2 class="section-title">2. Edit & send</h2>
+          <label class="field-label">Subject</label>
+          <input id="compose-subject" type="text" placeholder="Subject will appear here after drafting" />
+
+          <label class="field-label">Body</label>
+          <textarea id="compose-body" rows="14" placeholder="Draft will appear here — fully editable before you send"></textarea>
+
+          <button id="send-btn" class="btn-primary">Send</button>
+          <p id="send-status" class="status-line"></p>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
